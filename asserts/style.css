@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.cross, .circle {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    
+}
+.cross::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background-color: black;
+    transform: translateY(450%) translateX(13%) rotateZ(45deg);
+    
+}
+.cross::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 10%;
+    background-color: black;
+    transform: translateY(450%) translateX(13%) rotateZ(-45deg);
+}
+.circle::before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background-color: black;
+    border-radius: 100%;
+    transform: translateY(22%) translateX(22%);
+}
+.circle::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: red;
+    border-radius: 100%;
+    transform: translateY(50%) translateX(50%);
+}
