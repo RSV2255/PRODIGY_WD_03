@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="asserts/style.css">
     <script src="asserts/script.js" defer></script>
 </head>
 <body>
-    <div class="container ">
-        <div class="title frontpage-hide">
-            <h1 class="title-heading">Tic-Tac-Toe</h1>
-        </div>
-        <div class="options frontpage-hide">
+    <div class="mainpage" value="mainPage">
+        <h1 class="title">Tic-Tac-Toe</h1>
+        <div class="buttons">
             <button class="singleplay">
                 Play with Computer
             </button>
@@ -23,34 +21,43 @@
                 Pass & Play
             </button>
         </div>
-        <div class="scores gamepage-hide">
-            <div class="wins X-wins"><h1>X</h1><h1 class="score X-score">0</h1></div>
-            <div class="wins O-wins"><h1>O</h1><h1 class="score O-score">0</h1></div>
+    </div>
+    <div class="game" value = "gamingPage">
+        <div class="scores">
+            <table border="3">
+                <tr>
+                <th>Player_1</th>
+                <th>Tie</th>
+                <th>Player_2</th>
+                </tr>
+                <tr>
+                    <td class="X_score">0</td>
+                    <td class="tie_score">0</td>
+                    <td class="O_score">0</td>
+                </tr>
+            </table>
         </div>
-        <div class="game gamepage-hide">
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
-            <button class="boxes"></button>
+        <div class="board">
+            <div class="square"><div class="mark X"></div></div>
+            <div class="square"><div class="mark O"></div></div>
+            <div class="square"><div class="mark X"></div></div>
+            <div class="square"><div class="mark O"></div></div>
+            <div class="square"><div class="mark X"></div></div>
+            <div class="square"><div class="mark O"></div></div>
+            <div class="square"><div class="mark X"></div></div>
+            <div class="square"><div class="mark O"></div></div>
+            <div class="square"><div class="mark X"></div></div>
         </div>
-
-        <button class="restart gamepage-hide">Restart</button>
-
-        <div class="result ">
-            <h1 class="result-view"></h1>
+        <div class="game_buttons">
+            <button class="game_btn restart">Restart</button>
+            <button class="game_btn exit">Exit</button>
         </div>
-        <div class="next-check ">
-            <button class="replay btn">
-                Replay
-            </button>
-            <button class="newgame btn">
-                New Game
-            </button>
+    </div>
+    <div class="result" value="resultPage">
+        <h1 class="finalResult">&#128521 X wins &#128521</h1>
+        <div class="buttons">
+            <button class="btn playAgain">Play Again</button>
+            <button class="btn Newgame">New game</button>
         </div>
     </div>
 </body>
