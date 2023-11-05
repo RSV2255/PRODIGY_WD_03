@@ -22,7 +22,27 @@
             </button>
         </div>
     </div>
-    <div class="game" value = "gamingPage">
+    <div class="playersmark">
+        <h1>Pick your side</h1>
+        <h4>Games always starts with 'X'</h4>
+        <div class="pick">
+            <div class="pick_X">
+                <input type="radio" name="mark" value="X">
+                <label>X</label>
+            </div>
+            <div class="pick_O">
+                <input type="radio" name="mark" value="O">
+                <label>O</label>
+            </div>
+            <button class="startGame">
+                Start Game
+            </button>
+            <button class="back">
+                Back
+            </button>
+        </div>
+    </div>
+    <div class="game">
         <div class="scores">
             <table border="3">
                 <tr>
@@ -38,26 +58,26 @@
             </table>
         </div>
         <div class="board">
-            <div class="square"><div class="mark X"></div></div>
-            <div class="square"><div class="mark O"></div></div>
-            <div class="square"><div class="mark X"></div></div>
-            <div class="square"><div class="mark O"></div></div>
-            <div class="square"><div class="mark X"></div></div>
-            <div class="square"><div class="mark O"></div></div>
-            <div class="square"><div class="mark X"></div></div>
-            <div class="square"><div class="mark O"></div></div>
-            <div class="square"><div class="mark X"></div></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
         </div>
         <div class="game_buttons">
             <button class="game_btn restart">Restart</button>
             <button class="game_btn exit">Exit</button>
         </div>
     </div>
-    <div class="result" value="resultPage">
+    <div class="result " value="resultPage">
         <h1 class="finalResult">&#128521 X wins &#128521</h1>
         <div class="buttons">
-            <button class="btn playAgain">Play Again</button>
-            <button class="btn Newgame">New game</button>
+            <button class="playAgain">Play Again</button>
+            <button class="Newgame">New game</button>
         </div>
     </div>
 </body>
