@@ -197,6 +197,9 @@ input[type="radio"] {
     margin-right: 2em;
 }
 
+.finalResult {
+    text-shadow: 3px 3px 3px orangered, -3px -3px 3px royalblue;
+}
 th,td {
     padding: 0.25em 0.1em;
 }
