@@ -132,6 +132,12 @@ input[type="radio"] {
     border: 2px solid blue;
     margin-bottom: 1em;
 }
+.pick_O:hover, .pick_X:hover {
+    color: white;
+    background-color: blue;
+    
+
+}
 .playersmark button {
     width: 30vmin;
     height: 7vmin;
