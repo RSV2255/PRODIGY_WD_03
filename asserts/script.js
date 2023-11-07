@@ -334,7 +334,6 @@ playAgainButton.addEventListener('click',() => {
         singlePlayer();
     }
     else {
-        
         for (let i = 0; i < box.length; i++) {
             box[i].classList.remove("X");
             box[i].classList.remove("O");
