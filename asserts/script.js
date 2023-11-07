@@ -263,9 +263,10 @@ const aiMove = (values,isAi) => {
 const firstMove = () => {
     let i;
     
-    if (countMarked <= 1) {
+    if (countMarked % 3 === 0) {
         let available = availableSpots(values);
         i = available[Math.floor((Math.random() * available.length))];
+        
     }
     else {
         let maxEval = -Infinity;
@@ -280,6 +281,8 @@ const firstMove = () => {
                 }
             }
         }
+        console.clear();
+        console.log(maxEval);
     }
     marking(i,ai);
     isGameOver();
