@@ -12,15 +12,13 @@ const resultPage = document.getElementsByClassName("result")[0];
 const singleplayerButton = document.getElementsByClassName("singleplay")[0];
 const multiplayerButton = document.getElementsByClassName("multiplay")[0];
 
-const pickX = document.getElementsByClassName("pick_X")[0];
-const pickO = document.getElementsByClassName("pick_O")[0];
 
-const startGameButton = document.getElementsByClassName("startGame")[0];
-const backButton = document.getElementsByClassName("back")[0];
+
+
 
 const box = document.getElementsByClassName("square");
 const restartButton = document.getElementsByClassName("restart")[0];
-const exit = document.getElementsByClassName("exit")[0];
+const exitButton = document.getElementsByClassName("exit")[0];
 
 const playAgainButton = document.getElementsByClassName("playAgain")[0];
 const newGameButton = document.getElementsByClassName("Newgame")[0];
@@ -49,10 +47,11 @@ let countMarked = 0;
 let xWins = 0;
 let oWins = 0;
 let tie = 0;
-let isHuman = true;
+let isHuman = false;
 let ai;
 let human;
 let winner = null;
+let isSinglePlay;
 const scores = {
     'X':1,
     'O':-1,
@@ -93,6 +92,12 @@ const resetGameBoard = () => {
     xWins = 0;
     oWins = 0;
     tie = 0;
+    winner = null;
+    isHuman = false;
+    for (let i = 0; i < box.length; i++) {
+        box[i].classList.remove("X");
+        box[i].classList.remove("O");
+    }
 }
 
 const isGameOver = () => {
@@ -142,6 +147,8 @@ const isGameOver = () => {
 }
 
 const multiPlayer = () => {
+    
+    isSinglePlay = false;
     view(gamingPage);
     for (let i = 0; i < box.length; i++) {
         box[i].addEventListener('click', () => {
@@ -190,7 +197,7 @@ const marking = (i,value) => {
     values[i] = value;
     countMarked++;
 }
-const isWinner = () => {
+const isWinner = (values) => {
     winner = null;
         let checkWin = ['','',''];
         for (let pattern of possibleWins) {
@@ -216,66 +223,70 @@ const isWinner = () => {
         }
         return winner;
 }
-const aiMove = (values,isAi,depth,spot) => {
-    const emptyBoxes = availableSpots(values);
-    if((spot !== null ))  {
-        let score = scores[spot];
-        return score;
+const aiMove = (values,isAi) => {
+    let score = isWinner(values);
+    if (score !== null) {
+        return scores[score];
+        
     }
-    if(isAi) {
-        let spot = isWinner();
+    
+    if (isAi) {
         let maxEval = -Infinity;
-        for(let x of emptyBoxes) {
-            values[x] = ai;
-            let eval = aiMove(values,false,depth--,spot);
-            values[x] = '';
-            if(eval > maxEval) {
-                maxEval = eval;
+        for(let x = 0; x < values.length; x++) {
+            if (values[x] === '') {
+                values[x] = ai;
+                let eval = aiMove(values,false);
+                values[x] = '';
+                if(eval > maxEval ) {
+                    maxEval = eval;
+                    
+                }
             }
         }
         return maxEval;
     }
     else {
-        let spot = isWinner();
-        let minEval = Infinity;
-        for(let x of emptyBoxes) {
-            values[x] = human;
-            
-            let eval = aiMove(values,true,depth--, spot);
-            values[x] = '';
-            if(eval < minEval) {
-                minEval = eval;
+        let maxEval = Infinity;
+        for(let x = 0; x < values.length; x++) {
+            if (values[x] === '') {
+                values[x] = human;
+                let eval = aiMove(values,true);
+                values[x] = '';
+                if(eval < maxEval ) {
+                    maxEval = eval;
+                }
             }
         }
-        return minEval;
+        return maxEval;
     }
 }
-
 const firstMove = () => {
     let i;
-    let available = availableSpots(values);
-    if (countMarked < 0) {
+    
+    if (countMarked <= 1) {
+        let available = availableSpots(values);
         i = available[Math.floor((Math.random() * available.length))];
     }
     else {
-        // i = available[0];
-        let spot = isWinner();
         let maxEval = -Infinity;
-        for(let x of available) {
-            values[x] = ai;
-            let eval = aiMove(values,false,countMarked++,spot);
-            values[x] = '';
-            if(eval > maxEval) {
-                maxEval = eval;
-                i = x;
+        for(let x = 0; x < values.length; x++) {
+            if (values[x] === '') {
+                values[x] = ai;
+                let eval = aiMove(values,false);
+                values[x] = '';
+                if(eval > maxEval ) {
+                    maxEval = eval;
+                    i = x;
+                }
             }
         }
     }
     marking(i,ai);
     isGameOver();
 }
-
 const singlePlayer = () => {
+    
+    isSinglePlay = true;
     view(gamingPage);
     if (!isHuman) {
         firstMove();
@@ -294,11 +305,71 @@ const singlePlayer = () => {
         }
     }
 }
-pickO.addEventListener('click',oPicked);
-pickX.addEventListener('click',xPicked);
-singleplayerButton.addEventListener('click',()=> {view(choosingMark);});
+
+singleplayerButton.addEventListener('click',()=> {
+    ai = 'X';
+    human = 'O';
+    isHuman = false;
+    singlePlayer();
+});
 multiplayerButton.addEventListener('click',multiPlayer);
+newGameButton.addEventListener('click', () => {
+    resetGameBoard();
+    view(mainPage);
+});
+exitButton.addEventListener('click', () => {
+    resetGameBoard();
+    view(mainPage);
+});
+playAgainButton.addEventListener('click',() => {
+    if(isSinglePlay) {
+        isHuman = false;
+        for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove("X");
+            box[i].classList.remove("O");
+            
+        }
+        values.fill('');
+        countMarked = 0;
+        singlePlayer();
+    }
+    else {
+        
+        for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove("X");
+            box[i].classList.remove("O");
+            
+        }
+        values.fill('');
+        countMarked = 0;
+        multiPlayer();
+    }
+})
 
-
-
+restartButton.addEventListener('click',() => {
+   
+    if(isSinglePlay) {
+        
+        isHuman = false;
+        for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove("X");
+            box[i].classList.remove("O");
+            
+        }
+        values.fill('');
+        countMarked = 0;
+        singlePlayer();
+    }
+    else {
+        
+        for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove("X");
+            box[i].classList.remove("O");
+            
+        }
+        values.fill('');
+        countMarked = 0;
+        multiPlayer();
+    }
+})
 
